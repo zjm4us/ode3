@@ -136,7 +136,6 @@ vector<TGraph> RK4SolveN(vector<pfunc_t> &fnlist, vector<double> &y,
   assert(fnlist.size() == y.size());   // need one initial condition per function
   int nFcn=fnlist.size();
   double h=(xmax-x)/nsteps;     // step size
-  vector<double> ytmp(nFcn);
   
   vector<TGraph> tg = SetupGraphs(nFcn);
   for (int i=0; i<nFcn; i++) tg[i].SetPoint(0,x,y[i]);
@@ -146,7 +145,7 @@ vector<TGraph> RK4SolveN(vector<pfunc_t> &fnlist, vector<double> &y,
     y=RK4StepN(fnlist, y, x, h, params);
     x+=h;
     for (int i=0; i<nFcn; i++) tg[i].SetPoint(n+1,x,y[i]);
-    if (fstop && fstop(x,ytmp,params)) break;
+    if (fstop && fstop(x,y,params)) break;
   }
   return tg;
 }

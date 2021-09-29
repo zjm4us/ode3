@@ -121,7 +121,8 @@ int main(int argc, char **argv){
   y0[3]=70;
   double x=0;
   double xmax=20;
-  auto tgN = RK4SolveN(v_fun, y0, 200, x, xmax, p_par, f_stop);
+  int nsteps=200;
+  auto tgN = RK4SolveN(v_fun, y0, nsteps, x, xmax, p_par, f_stop);
   TCanvas *c2 = new TCanvas("c2","ODE solutions 2",dw,dh);
   tgN[2].Draw("a*");
   c2->Draw();
